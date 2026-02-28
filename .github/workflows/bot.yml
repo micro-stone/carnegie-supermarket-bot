@@ -1,29 +1,23 @@
-name: Supermarket Bot
+name: Supermarket Specials Notifier
 
 on:
   schedule:
-    - cron: '0 21 * * *'
-  workflow_dispatch:
+    - cron: '0 0 * * 3' # 每周三早上 11 点（AEST 时间转换）
+  workflow_dispatch: # 支持手动触发
 
 jobs:
-  run-bot:
+  scrape_and_push:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup Python
+      - uses: actions/checkout@v3
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install requests python-telegram-bot
-      - name: Run bot
+        run: pip install requests beautifulsoup4
+      - name: Run Scraper
         env:
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-          CHAT_ID: ${{ secrets.CHAT_ID }}
-        run: python main.py
+          TG_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python scrape_specials.py
