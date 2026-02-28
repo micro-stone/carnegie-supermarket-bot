@@ -1,2 +1,2 @@
-# carnegie-supermarket-bot
-carnegie-supermarket-bot
+# carnegie-price-monitor
+carnegie-price-monitor
