@@ -20,7 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
-
+             playwright install
       - name: Run bot
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
