@@ -2,18 +2,17 @@ name: Carnegie 3163 价格监控
 
 on:
   schedule:
-    - cron: "0 21 * * *"    # 08:00 AEDT
-    - cron: "0 1 * * *"     # 12:00 AEDT
-    - cron: "0 7 * * *"     # 18:00 AEDT
+    - cron: "0 21 * * *"   # 08:00 AEDT (UTC+11)
+    - cron: "0 1  * * *"   # 12:00 AEDT
+    - cron: "0 7  * * *"   # 18:00 AEDT
   workflow_dispatch:
 
 jobs:
   monitor:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: write
-    # Playwright 需要更多时间，给足 15 分钟
-    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@v4
@@ -23,23 +22,20 @@ jobs:
           python-version: "3.11"
           cache: "pip"
 
-      - name: 安装 Python 依赖
+      # cloudscraper 是纯 Python，pip install 即可，无需安装浏览器
+      - name: 安装依赖
         run: pip install -r requirements.txt
-
-      # Playwright 需要单独安装浏览器二进制
-      - name: 安装 Playwright 浏览器
-        run: playwright install chromium --with-deps
 
       - name: 运行价格监控
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python monitor.py
 
       - name: 提交价格历史
         run: |
           git config user.name  "price-bot"
           git config user.email "bot@noreply.github.com"
-          git add data/prices.json
+          git add data/prices.json data/coles_api_url.txt 2>/dev/null || true
           git diff --staged --quiet || \
             git commit -m "prices: $(date +'%Y-%m-%d %H:%M') AEDT" && git push
