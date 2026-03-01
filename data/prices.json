@@ -1,5 +1,15 @@
 {
-  "全脂牛奶 2L": {},
+  "全脂牛奶 2L": {
+    "ALDI": {
+      "store": "ALDI",
+      "branch": "Carnegie Central / Glen Huntly (统一价)",
+      "name": "BON APPETIT",
+      "price": 1.78,
+      "was_price": null,
+      "on_special": false,
+      "source": "new"
+    }
+  },
   "鸡蛋 12枚": {},
   "鸡胸肉 1kg": {},
   "白面包": {},
