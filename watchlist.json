@@ -1,41 +1,10 @@
 [
   {
     "name": "全脂牛奶 2L",
-    "woolworths_id": "165262",
-    "coles_query": "pauls full cream milk 2l",
+    "woolworths_id": "165367",
+    "coles_query": "Cage Free Eggs 12 Pack",
     "monitor_aldi": true,
-    "aldi_keyword": "full cream milk",
+    "aldi_keyword": "Cage Free Eggs 12 Pack",
     "alert_threshold": 0.10
-  },
-  {
-    "name": "鸡蛋 12枚",
-    "woolworths_id": "32501",
-    "coles_query": "free range eggs 12 pack",
-    "monitor_aldi": true,
-    "aldi_keyword": "eggs",
-    "alert_threshold": 0.20
-  },
-  {
-    "name": "鸡胸肉 1kg",
-    "woolworths_id": "155984",
-    "coles_query": "chicken breast 1kg",
-    "monitor_aldi": false,
-    "alert_threshold": 0.50
-  },
-  {
-    "name": "白面包",
-    "woolworths_id": "105919",
-    "coles_query": "tip top white bread",
-    "monitor_aldi": true,
-    "aldi_keyword": "white bread",
-    "alert_threshold": 0.15
-  },
-  {
-    "name": "黄油 500g",
-    "woolworths_id": "105156",
-    "coles_query": "butter 500g",
-    "monitor_aldi": true,
-    "aldi_keyword": "butter",
-    "alert_threshold": 0.20
   }
 ]
